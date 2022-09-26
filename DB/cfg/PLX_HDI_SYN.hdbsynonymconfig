@@ -1,0 +1,112 @@
+{
+  "SYN_AS_CODE_TABLE": {
+    "target": {
+      "object": "AS_CODE_TABLE",
+      "grantor": "ServiceName_PLX_HDI"
+    }
+  },
+  
+  "SYN_AS_CC": {
+    "target": {
+      "object": "AS_CC",
+      "grantor": "ServiceName_PLX_HDI"
+    }
+  },
+  
+   "SYN_AS_SUB_ACCT": {
+    "target": {
+      "object": "AS_SUB_ACCT",
+      "grantor": "ServiceName_PLX_HDI"
+    }
+  },
+  
+  "SYN_AS_CONTRACT": {
+    "target": {
+      "object": "AS_CONTRACT",
+      "grantor": "ServiceName_PLX_HDI"
+    }
+  },
+  
+  "SYN_AS_CORP": {
+    "target": {
+      "object": "AS_CORP",
+      "grantor": "ServiceName_PLX_HDI"
+    }
+  },
+  
+  "SYN_AS_INV_LINE": {
+    "target": {
+      "object": "AS_INV_LINE",
+      "grantor": "ServiceName_PLX_HDI"
+    }
+  },
+  
+  "SYN_AS_INV": {
+    "target": {
+      "object": "AS_INV",
+      "grantor": "ServiceName_PLX_HDI"
+    }
+  },
+  
+   "SYN_AS_ITEM": {
+    "target": {
+      "object": "AS_ITEM",
+      "grantor": "ServiceName_PLX_HDI"
+    }
+  },
+  
+  
+   "SYN_AS_ITEM_VEND": {
+    "target": {
+      "object": "AS_ITEM_VEND",
+      "grantor": "ServiceName_PLX_HDI"
+    }
+  },
+  
+  
+   "SYN_AS_ITEM_VEND_PKG": {
+    "target": {
+      "object": "AS_ITEM_VEND_PKG",
+      "grantor": "ServiceName_PLX_HDI"
+    }
+  },
+  
+  
+   "SYN_AS_MFR": {
+    "target": {
+      "object": "AS_MFR",
+      "grantor": "ServiceName_PLX_HDI"
+    }
+  },
+  
+  
+   "SYN_AS_PO": {
+    "target": {
+      "object": "AS_PO",
+      "grantor": "ServiceName_PLX_HDI"
+    }
+  },
+  
+  
+   "SYN_AS_PO_LINE": {
+    "target": {
+      "object": "AS_PO_LINE",
+      "grantor": "ServiceName_PLX_HDI"
+    }
+  },
+  
+  
+   "SYN_AS_VEND": {
+    "target": {
+      "object": "AS_VEND",
+      "grantor": "ServiceName_PLX_HDI"
+    }
+  },
+  
+   "SYN_AS_VEND_REMIT": {
+    "target": {
+      "object": "AS_VEND_REMIT",
+      "grantor": "ServiceName_PLX_HDI"
+    }
+  }
+}

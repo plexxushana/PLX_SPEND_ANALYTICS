@@ -1,0 +1,10 @@
+{
+	"ServiceName_PLX_HDI": {
+		"object_owner" : {
+			"container_roles": ["container_read#"]
+		},
+		"application_user" : {
+			"container_roles": ["container_read"]
+		}
+	}
+}

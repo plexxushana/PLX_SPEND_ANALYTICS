@@ -1,0 +1,106 @@
+{
+  "SYN_AS_CODE_TABLE": {
+    "target": {
+      "object": "AS_CODE_TABLE"
+    }
+  },
+  
+  "SYN_AS_CC": {
+    "target": {
+      "object": "AS_CC"
+    }
+  },
+  
+   "SYN_AS_SUB_ACCT": {
+    "target": {
+      "object": "AS_SUB_ACCT"
+    }
+  },
+  
+  "SYN_AS_CONTRACT": {
+    "target": {
+      "object": "AS_CONTRACT"
+    }
+  },
+ 
+  "SYN_AS_CORP": {
+    "target": {
+      "object": "AS_CORP"
+    }
+  },
+ 
+  "SYN_AS_INV_LINE": {
+    "target": {
+      "object": "AS_INV_LINE"
+    }
+  },
+  
+  "SYN_AS_INV": {
+    "target": {
+      "object": "AS_INV"
+    
+    }
+  },
+  
+   "SYN_AS_ITEM": {
+    "target": {
+      "object": "AS_ITEM"
+    
+    }
+  },
+  
+  
+   "SYN_AS_ITEM_VEND": {
+    "target": {
+      "object": "AS_ITEM_VEND"
+    
+    }
+  },
+  
+  
+   "SYN_AS_ITEM_VEND_PKG": {
+    "target": {
+      "object": "AS_ITEM_VEND_PKG"
+    
+    }
+  },
+  
+  
+   "SYN_AS_MFR": {
+    "target": {
+      "object": "AS_MFR"
+    
+    }
+  },
+  
+  
+   "SYN_AS_PO": {
+    "target": {
+      "object": "AS_PO"
+    
+    }
+  },
+  
+  
+   "SYN_AS_PO_LINE": {
+    "target": {
+      "object": "AS_PO_LINE"
+    
+    }
+  },
+  
+  
+   "SYN_AS_VEND": {
+    "target": {
+      "object": "AS_VEND"
+    
+    }
+  },
+  
+   "SYN_AS_VEND_REMIT": {
+    "target": {
+      "object": "AS_VEND_REMIT"
+    
+    }
+  }
+}

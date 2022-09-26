@@ -2,19 +2,30 @@ ID: PLX_SOURCING_ANALYTICS
 _schema-version: '2.1'
 description: Sourcing Analytics Project
 version: 0.0.1
-
 modules:
- - name: DB
-   type: hdb
-   path: DB
-   requires:
-    - name: hdi_DB
-
+  - name: DB
+    type: hdb
+    path: DB
+    requires:
+      - name: hdi_DB
+        properties:
+          TARGET_CONTAINER: '~{hdi-container-name}'
+      - name: cross-container-service-plx-hdi
+        group: SERVICE_REPLACEMENTS
+        properties:
+          key: ServiceName_PLX_HDI
+          service: '~{the-service-name}'
 resources:
- - name: hdi_DB
-   parameters:
+  - name: hdi_DB
+    parameters:
       config:
-         schema: PLX_SPEND
-   properties:
-      hdi-container-name: ${service-name}
-   type: com.sap.xs.hdi-container
+        schema: PLX_SPEND
+    properties:
+      hdi-container-name: '${service-name}'
+    type: com.sap.xs.hdi-container
+  - name: cross-container-service-plx-hdi
+    parameters:
+      service-name: PLX_HDI
+    properties:
+      the-service-name: '${service-name}'
+    type: org.cloudfoundry.existing-service
