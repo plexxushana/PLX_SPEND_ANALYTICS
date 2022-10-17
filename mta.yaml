@@ -7,7 +7,7 @@ modules:
     type: hdb
     path: DB
     requires:
-      - name: hdi_DB
+      - name: HDI_SPEND
         properties:
           TARGET_CONTAINER: '~{hdi-container-name}'
       - name: cross-container-service-plx-hdi
@@ -16,7 +16,7 @@ modules:
           key: ServiceName_PLX_HDI
           service: '~{the-service-name}'
 resources:
-  - name: hdi_DB
+  - name: HDI_SPEND
     parameters:
       config:
         schema: PLX_SPEND

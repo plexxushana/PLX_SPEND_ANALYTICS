@@ -1,10 +1,10 @@
 {
 	"ServiceName_PLX_HDI": {
 		"object_owner" : {
-			"container_roles": ["container_read#"]
+			"container_roles": ["container_read#", "plx_security::ZALL_MODELS"]
 		},
 		"application_user" : {
-			"container_roles": ["container_read"]
+			"container_roles": ["container_read", "plx_security::ZALL_MODELS"]
 		}
 	}
 }

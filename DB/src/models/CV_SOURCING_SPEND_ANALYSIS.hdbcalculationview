@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CV_SOURCING_SPEND_ANALYSIS" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="CV_SOURCING_SPEND_ANALYSIS"/>
+<localVariables>
+  <variable id="IP_INV_YEAR" parameter="true">
+    <descriptions defaultDescription=""/>
+    <variableProperties datatype="NVARCHAR" length="4" mandatory="false">
+      <valueDomain type="empty"/>
+      <selection multiLine="false" type="SingleValue"/>
+    </variableProperties>
+  </variable>
+</localVariables>
+<variableMappings/>
+<dataSources>
+  <DataSource id="COMPR_SPEND">
+    <resourceUri>COMPR_SPEND</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="PO"/>
+      <viewAttribute id="COMP_CODE"/>
+      <viewAttribute id="KONNR"/>
+      <viewAttribute id="MFRPN"/>
+      <viewAttribute id="KOKRS"/>
+      <viewAttribute id="KOSTL"/>
+      <viewAttribute id="AUFNR"/>
+      <viewAttribute id="SAKNR"/>
+      <viewAttribute id="MATNR"/>
+      <viewAttribute id="WERKS"/>
+      <viewAttribute id="Z_INV_BUOM"/>
+      <viewAttribute id="Z_LIFNR"/>
+      <viewAttribute id="CD_VEND_NAME"/>
+      <viewAttribute id="ZPR_PKGSTR"/>
+      <viewAttribute id="MATKL"/>
+      <viewAttribute id="MFRNR"/>
+      <viewAttribute id="KDATB"/>
+      <viewAttribute id="KDATE"/>
+      <viewAttribute id="BUDAT"/>
+      <viewAttribute id="SOURCE"/>
+      <viewAttribute id="COST_CENTER_NAME"/>
+      <viewAttribute id="CORP_NAME"/>
+      <viewAttribute id="IDNLF"/>
+      <viewAttribute id="Z_ESTIMATED_CONTRACT"/>
+      <viewAttribute id="PO_LINE_NO"/>
+      <viewAttribute id="Z_INVOICE_OUOM"/>
+      <viewAttribute id="MAKTX"/>
+      <viewAttribute id="INV_LINE_NO"/>
+      <viewAttribute id="INV_NO"/>
+      <viewAttribute id="SUB_ACCT_ID"/>
+      <viewAttribute id="SUB_ACCT_NAME"/>
+      <viewAttribute id="Z_INV_TAMT"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="CD_INV_YEAR" datatype="NVARCHAR" length="4" expressionLanguage="SQL">
+        <formula>left(&quot;BUDAT&quot;, 4)</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <input node="COMPR_SPEND"/>
+  
+    <filter>&quot;CD_INV_YEAR&quot; = '$$IP_INV_YEAR$$'</filter>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Projection_1">
+  <attributes>
+    <attribute id="PO" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PO"/>
+      <keyMapping columnObjectName="Projection_1" columnName="PO"/>
+    </attribute>
+    <attribute id="COMP_CODE" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="COMP_CODE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="COMP_CODE"/>
+    </attribute>
+    <attribute id="KONNR" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="KONNR"/>
+      <keyMapping columnObjectName="Projection_1" columnName="KONNR"/>
+    </attribute>
+    <attribute id="MFRPN" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MFRPN"/>
+      <keyMapping columnObjectName="Projection_1" columnName="MFRPN"/>
+    </attribute>
+    <attribute id="KOKRS" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="KOKRS"/>
+      <keyMapping columnObjectName="Projection_1" columnName="KOKRS"/>
+    </attribute>
+    <attribute id="KOSTL" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="KOSTL"/>
+      <keyMapping columnObjectName="Projection_1" columnName="KOSTL"/>
+    </attribute>
+    <attribute id="AUFNR" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="AUFNR"/>
+      <keyMapping columnObjectName="Projection_1" columnName="AUFNR"/>
+    </attribute>
+    <attribute id="SAKNR" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SAKNR"/>
+      <keyMapping columnObjectName="Projection_1" columnName="SAKNR"/>
+    </attribute>
+    <attribute id="MATNR" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MATNR"/>
+      <keyMapping columnObjectName="Projection_1" columnName="MATNR"/>
+    </attribute>
+    <attribute id="WERKS" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="WERKS"/>
+      <keyMapping columnObjectName="Projection_1" columnName="WERKS"/>
+    </attribute>
+    <attribute id="Z_INV_BUOM" order="11" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Z_INV_BUOM"/>
+      <keyMapping columnObjectName="Projection_1" columnName="Z_INV_BUOM"/>
+    </attribute>
+    <attribute id="Z_LIFNR" order="12" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Z_LIFNR"/>
+      <keyMapping columnObjectName="Projection_1" columnName="Z_LIFNR"/>
+    </attribute>
+    <attribute id="CD_VEND_NAME" order="13" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CD_VEND_NAME"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CD_VEND_NAME"/>
+    </attribute>
+    <attribute id="ZPR_PKGSTR" order="14" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ZPR_PKGSTR"/>
+      <keyMapping columnObjectName="Projection_1" columnName="ZPR_PKGSTR"/>
+    </attribute>
+    <attribute id="MATKL" order="15" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MATKL"/>
+      <keyMapping columnObjectName="Projection_1" columnName="MATKL"/>
+    </attribute>
+    <attribute id="MFRNR" order="16" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MFRNR"/>
+      <keyMapping columnObjectName="Projection_1" columnName="MFRNR"/>
+    </attribute>
+    <attribute id="KDATB" order="17" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="KDATB"/>
+      <keyMapping columnObjectName="Projection_1" columnName="KDATB"/>
+    </attribute>
+    <attribute id="KDATE" order="18" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="KDATE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="KDATE"/>
+    </attribute>
+    <attribute id="BUDAT" order="19" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="BUDAT"/>
+      <keyMapping columnObjectName="Projection_1" columnName="BUDAT"/>
+    </attribute>
+    <attribute id="SOURCE" order="20" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SOURCE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="SOURCE"/>
+    </attribute>
+    <attribute id="COST_CENTER_NAME" order="21" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="COST_CENTER_NAME"/>
+      <keyMapping columnObjectName="Projection_1" columnName="COST_CENTER_NAME"/>
+    </attribute>
+    <attribute id="CORP_NAME" order="22" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CORP_NAME"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CORP_NAME"/>
+    </attribute>
+    <attribute id="IDNLF" order="23" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="IDNLF"/>
+      <keyMapping columnObjectName="Projection_1" columnName="IDNLF"/>
+    </attribute>
+    <attribute id="Z_ESTIMATED_CONTRACT" order="24" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Z_ESTIMATED_CONTRACT"/>
+      <keyMapping columnObjectName="Projection_1" columnName="Z_ESTIMATED_CONTRACT"/>
+    </attribute>
+    <attribute id="PO_LINE_NO" order="25" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PO_LINE_NO"/>
+      <keyMapping columnObjectName="Projection_1" columnName="PO_LINE_NO"/>
+    </attribute>
+    <attribute id="Z_INVOICE_OUOM" order="26" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Z_INVOICE_OUOM"/>
+      <keyMapping columnObjectName="Projection_1" columnName="Z_INVOICE_OUOM"/>
+    </attribute>
+    <attribute id="MAKTX" order="27" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MAKTX"/>
+      <keyMapping columnObjectName="Projection_1" columnName="MAKTX"/>
+    </attribute>
+    <attribute id="INV_NO" order="29" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="INV_NO"/>
+      <keyMapping columnObjectName="Projection_1" columnName="INV_NO"/>
+    </attribute>
+    <attribute id="SUB_ACCT_NAME" order="31" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SUB_ACCT_NAME"/>
+      <keyMapping columnObjectName="Projection_1" columnName="SUB_ACCT_NAME"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="INV_LINE_NO" order="28" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="INV_LINE_NO"/>
+      <measureMapping columnObjectName="Projection_1" columnName="INV_LINE_NO"/>
+    </measure>
+    <measure id="SUB_ACCT_ID" order="30" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="SUB_ACCT_ID"/>
+      <measureMapping columnObjectName="Projection_1" columnName="SUB_ACCT_ID"/>
+    </measure>
+    <measure id="Z_INV_TAMT" order="32" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Z_INV_TAMT"/>
+      <measureMapping columnObjectName="Projection_1" columnName="Z_INV_TAMT"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="236"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

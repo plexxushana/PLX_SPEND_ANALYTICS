@@ -108,5 +108,11 @@
       "object": "AS_VEND_REMIT",
       "grantor": "ServiceName_PLX_HDI"
     }
+  },
+   "SYN_CV_SPEND_INVOICES": {
+    "target": {
+      "object": "plx_analytics::CA_PLX_SPEND_INVOICES",
+      "grantor": "ServiceName_PLX_HDI" 
+    }
   }
 }

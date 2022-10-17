@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:Variable="http://www.sap.com/ndb/BiModelVariable.ecore" id="CV_COMPREHENSIVE_SPEND" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="CV_COMPREHENSIVE_SPEND"/>
+<localVariables>
+  <variable id="IP_YEAR" parameter="true">
+    <descriptions defaultDescription=""/>
+    <variableProperties datatype="NVARCHAR" length="4" mandatory="false" defaultValue="2022">
+      <valueDomain type="empty"/>
+      <selection multiLine="false" type="SingleValue"/>
+    </variableProperties>
+  </variable>
+</localVariables>
+<variableMappings>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="CV_ALLSCRIPTS_SPEND">
+    <targetVariable name="IP_YEAR" resourceUri="CV_ALLSCRIPTS_SPEND"/>
+    <localVariable>IP_YEAR</localVariable>
+  </mapping>
+</variableMappings>
+<dataSources>
+  <DataSource id="SYN_CV_SPEND_INVOICES">
+    <resourceUri>SYN_CV_SPEND_INVOICES</resourceUri>
+  </DataSource>
+  <DataSource id="CV_ALLSCRIPTS_SPEND">
+    <resourceUri>CV_ALLSCRIPTS_SPEND</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="HOSPITAL_CNT"/>
+      <viewAttribute id="Z_ORDER_COUNT"/>
+      <viewAttribute id="Z_ORD_LINE_CNT"/>
+      <viewAttribute id="Z_VENDOR_CNT"/>
+      <viewAttribute id="Z_MATNR_CNT"/>
+      <viewAttribute id="COMMODITY"/>
+      <viewAttribute id="SEGMENT"/>
+      <viewAttribute id="FAMILY"/>
+      <viewAttribute id="CLASS"/>
+      <viewAttribute id="LTEXT"/>
+      <viewAttribute id="MEMBER"/>
+      <viewAttribute id="BUTXT"/>
+      <viewAttribute id="BUKRS"/>
+      <viewAttribute id="Z_ORDER_TYPE"/>
+      <viewAttribute id="BSART"/>
+      <viewAttribute id="MFRNR"/>
+      <viewAttribute id="KONNR"/>
+      <viewAttribute id="KDATB"/>
+      <viewAttribute id="KDATE"/>
+      <viewAttribute id="ZTERM"/>
+      <viewAttribute id="IDNLF"/>
+      <viewAttribute id="TXZ01"/>
+      <viewAttribute id="EBELN"/>
+      <viewAttribute id="EBELP"/>
+      <viewAttribute id="GJAHR"/>
+      <viewAttribute id="BUZEI"/>
+      <viewAttribute id="BUDAT"/>
+      <viewAttribute id="BLDAT"/>
+      <viewAttribute id="WEMPF"/>
+      <viewAttribute id="Z_INV_TC"/>
+      <viewAttribute id="Z_INV_LC"/>
+      <viewAttribute id="SHKZG"/>
+      <viewAttribute id="MFRPN"/>
+      <viewAttribute id="GSBER"/>
+      <viewAttribute id="KOKRS"/>
+      <viewAttribute id="KOSTL"/>
+      <viewAttribute id="AUFNR"/>
+      <viewAttribute id="SAKNR"/>
+      <viewAttribute id="ANLN1"/>
+      <viewAttribute id="ANLN2"/>
+      <viewAttribute id="MATNR"/>
+      <viewAttribute id="WERKS"/>
+      <viewAttribute id="Z_INV_BUOM"/>
+      <viewAttribute id="ZFISCAL_YEAR_QUARTER"/>
+      <viewAttribute id="ZFISCAL_MONTH"/>
+      <viewAttribute id="ZFISCAL_QUARTER"/>
+      <viewAttribute id="ZFISCAL_PERIOD"/>
+      <viewAttribute id="ZFISCAL_YEAR"/>
+      <viewAttribute id="Z_ESTIMATED_CONTRACT"/>
+      <viewAttribute id="Z_MANIPULATED_CONTRACT"/>
+      <viewAttribute id="Z_LIFNR"/>
+      <viewAttribute id="Z_VENDOR_NAME"/>
+      <viewAttribute id="Z_INVOICE_OUOM"/>
+      <viewAttribute id="BEDNR"/>
+      <viewAttribute id="ZCALENDAR_YEAR"/>
+      <viewAttribute id="ZCAL_MONTH"/>
+      <viewAttribute id="SGTXT"/>
+      <viewAttribute id="EXTWG"/>
+      <viewAttribute id="Z_COMMODITY"/>
+      <viewAttribute id="BANFN"/>
+      <viewAttribute id="TXT20"/>
+      <viewAttribute id="TXT20_1"/>
+      <viewAttribute id="Z_SEGMENT_TITLE_EN"/>
+      <viewAttribute id="Z_FAMILE_TITLE_EN"/>
+      <viewAttribute id="Z_CLASS_TITLE_EN"/>
+      <viewAttribute id="KTOKK"/>
+      <viewAttribute id="Z_COSTELEM"/>
+      <viewAttribute id="KTPNR"/>
+      <viewAttribute id="BLART"/>
+      <viewAttribute id="XBLNR"/>
+      <viewAttribute id="XBLNR_ItemRef"/>
+      <viewAttribute id="ZPR_PKGSTR"/>
+      <viewAttribute id="WGBEZ"/>
+      <viewAttribute id="MANUFACTURER_NAME"/>
+      <viewAttribute id="Z_EKPO_NETWR"/>
+      <viewAttribute id="MAKTX"/>
+      <viewAttribute id="MATKL"/>
+      <viewAttribute id="POSID"/>
+      <viewAttribute id="PCW_Project_Name"/>
+      <viewAttribute id="MTART"/>
+      <viewAttribute id="MTBEZ"/>
+      <viewAttribute id="DATE_SQL"/>
+      <viewAttribute id="ZCAL_MONTH_NUM"/>
+      <viewAttribute id="ATWRT"/>
+      <viewAttribute id="Z_INV_TAMT"/>
+      <viewAttribute id="Z_INV_LAMT"/>
+      <viewAttribute id="BEZNK"/>
+      <viewAttribute id="REFWR"/>
+      <viewAttribute id="WRBTR"/>
+      <viewAttribute id="DMBTR"/>
+      <viewAttribute id="REEWR"/>
+      <viewAttribute id="UMREZ"/>
+      <viewAttribute id="Z_INV_BQTY"/>
+      <viewAttribute id="Z_INVOICE_QTY"/>
+      <viewAttribute id="Z_EKPO_MENGE"/>
+      <viewAttribute id="NETPR"/>
+      <viewAttribute id="SERIAL_NUMBER"/>
+      <viewAttribute id="LOT_NUMBER"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="CD_SOURCE" datatype="NVARCHAR" length="10" expressionLanguage="SQL">
+        <formula>'SAP'</formula>
+      </calculatedViewAttribute>
+    
+      <calculatedViewAttribute id="CD_BUDAT" datatype="DATE" expressionLanguage="SQL">
+        <formula>TO_DATE(&quot;BUDAT&quot;)</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <input node="SYN_CV_SPEND_INVOICES"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_2">
+    <viewAttributes>
+      <viewAttribute id="INV_ID"/>
+      <viewAttribute id="INV_DATE"/>
+      <viewAttribute id="NET_INV_AMT"/>
+      <viewAttribute id="CC_ID"/>
+      <viewAttribute id="CC_IDB"/>
+      <viewAttribute id="SUB_ACCT_ID"/>
+      <viewAttribute id="SUB_ACCT_IDB"/>
+      <viewAttribute id="VEND_REMIT_IDB"/>
+      <viewAttribute id="VEND_REMIT_ID"/>
+      <viewAttribute id="VEND_ID"/>
+      <viewAttribute id="VEND_IDB"/>
+      <viewAttribute id="REMIT_NAME"/>
+      <viewAttribute id="CORP_NAME"/>
+      <viewAttribute id="CD_INV_TEMP"/>
+      <viewAttribute id="CD_PO_NON_PO"/>
+      <viewAttribute id="INV_NO"/>
+      <viewAttribute id="LINE_NO"/>
+      <viewAttribute id="CD_ITEM_NO"/>
+      <viewAttribute id="DESCR"/>
+      <viewAttribute id="CD_VENDOR_CAT"/>
+      <viewAttribute id="PRICE"/>
+      <viewAttribute id="QTY"/>
+      <viewAttribute id="COST_CENTER"/>
+      <viewAttribute id="COST_CENTER_NAME"/>
+      <viewAttribute id="SUB_ACCT_NAME"/>
+      <viewAttribute id="ACCT_FMT"/>
+      <viewAttribute id="CD_VEND_NAME"/>
+      <viewAttribute id="CD_VEND_CODE"/>
+      <viewAttribute id="CD_CORPORATION"/>
+      <viewAttribute id="VEND_NO"/>
+      <viewAttribute id="PMT_PRICE"/>
+      <viewAttribute id="COMDTY_NAME"/>
+      <viewAttribute id="CD_UOM"/>
+      <viewAttribute id="CD_CURRENCY"/>
+      <viewAttribute id="CORP_ID"/>
+      <viewAttribute id="VOUCH_NO"/>
+      <viewAttribute id="CONTRACT_NO"/>
+      <viewAttribute id="MFR_NAME"/>
+      <viewAttribute id="CD_MFR_NUM"/>
+    
+      <viewAttribute id="PO_NO"/>
+    
+      <viewAttribute id="CTLG_NO"/>
+    
+      <viewAttribute id="EFFECTIVE_DATE"/>
+    
+      <viewAttribute id="ACCT_NO"/>
+    
+      <viewAttribute id="UM_CD"/>
+    
+      <viewAttribute id="TYPE_CD"/>
+    
+      <viewAttribute id="INV_LINE_ID"/>
+    
+      <viewAttribute id="CM_AMOUNT"/>
+    
+      <viewAttribute id="CD_MFR_ID"/>
+    
+      <viewAttribute id="CD_EFFECTIVE_DATE"/>
+    
+      <viewAttribute id="CD_EXPIRE_DATE"/>
+    
+      <viewAttribute id="CD_PO_LINE_ID"/>
+    
+      <viewAttribute id="CD_INV_DATE"/>
+    
+      <viewAttribute id="PO_LINE_NO"/>
+    
+      <viewAttribute id="MATERIAL_DESC"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="CD_CORP_COMPANY" datatype="NVARCHAR" length="4" expressionLanguage="SQL">
+        <formula>&quot;CORP_ID&quot;</formula>
+      </calculatedViewAttribute>
+    
+      <calculatedViewAttribute id="CD_SOURCE" datatype="NVARCHAR" length="10" expressionLanguage="SQL">
+    
+        <formula>'AS'</formula>
+    
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <input node="CV_ALLSCRIPTS_SPEND"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:UnionView" id="Union_1">
+    <viewAttributes>
+      <viewAttribute id="PO"/>
+    
+      <viewAttribute id="Z_INV_TAMT" aggregationType="sum"/>
+    
+      <viewAttribute id="COMP_CODE"/>
+    
+      <viewAttribute id="KONNR"/>
+      <viewAttribute id="MFRPN"/>
+    
+      <viewAttribute id="KOKRS"/>
+    
+      <viewAttribute id="KOSTL"/>
+      <viewAttribute id="AUFNR"/>
+      <viewAttribute id="SAKNR"/>
+      <viewAttribute id="MATNR"/>
+      <viewAttribute id="WERKS"/>
+    
+      <viewAttribute id="Z_INV_BUOM"/>
+      <viewAttribute id="Z_LIFNR"/>
+      <viewAttribute id="CD_VEND_NAME"/>
+      <viewAttribute id="ZPR_PKGSTR"/>
+      <viewAttribute id="MATKL"/>
+    
+      <viewAttribute id="MFRNR"/>
+    
+      <viewAttribute id="KDATB"/>
+    
+      <viewAttribute id="KDATE"/>
+    
+      <viewAttribute id="BUDAT"/>
+    
+      <viewAttribute id="COST_CENTER_NAME"/>
+      <viewAttribute id="CORP_NAME"/>
+      <viewAttribute id="IDNLF"/>
+    
+      <viewAttribute id="Z_ESTIMATED_CONTRACT"/>
+    
+      <viewAttribute id="PO_LINE_NO"/>
+      <viewAttribute id="Z_INVOICE_OUOM"/>
+    
+      <viewAttribute id="MAKTX"/>
+      <viewAttribute id="INV_LINE_NO" aggregationType="sum"/>
+      <viewAttribute id="INV_NO"/>
+    
+      <viewAttribute id="SUB_ACCT_ID" aggregationType="sum"/>
+      <viewAttribute id="SUB_ACCT_NAME"/>
+    
+      <viewAttribute id="CD_SOURCE"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Projection_1" emptyUnionBehavior="NO_ROW">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PO" source="EBELN"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="Z_INV_TAMT" source="Z_INV_TAMT"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="COMP_CODE" source="BUKRS"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="KONNR" source="KONNR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MFRPN" source="MFRPN"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="KOKRS" source="KOKRS"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="KOSTL" source="KOSTL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="AUFNR" source="AUFNR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SAKNR" source="SAKNR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MATNR" source="MATNR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="WERKS" source="WERKS"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="Z_INV_BUOM" source="Z_INV_BUOM"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Z_LIFNR" source="Z_LIFNR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CD_VEND_NAME" source="Z_VENDOR_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ZPR_PKGSTR" source="ZPR_PKGSTR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MATKL" source="MATKL"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="MFRNR" source="MFRNR"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="KDATB" source="KDATB"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="KDATE" source="KDATE"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="BUDAT" source="CD_BUDAT"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="COST_CENTER_NAME" source="LTEXT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CORP_NAME" source="BUTXT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="IDNLF" source="IDNLF"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="Z_ESTIMATED_CONTRACT" source="Z_ESTIMATED_CONTRACT"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="PO_LINE_NO" source="EBELP"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Z_INVOICE_OUOM" source="Z_INVOICE_OUOM"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="MAKTX" source="MAKTX"/>
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="INV_LINE_NO" null="true" value=""/>
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="INV_NO" null="true" value=""/>
+    
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="SUB_ACCT_ID" null="true" value=""/>
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="SUB_ACCT_NAME" null="true" value=""/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="CD_SOURCE" source="CD_SOURCE"/>
+    </input>
+    <input node="Projection_2" emptyUnionBehavior="NO_ROW">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PO" source="PO_NO"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="Z_INV_TAMT" source="CM_AMOUNT"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="COMP_CODE" source="CD_CORP_COMPANY"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="KONNR" source="CONTRACT_NO"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MFRPN" source="CTLG_NO"/>
+    
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="KOKRS" null="true" value=""/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="KOSTL" source="COST_CENTER"/>
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="AUFNR" null="true" value=""/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SAKNR" source="ACCT_FMT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MATNR" source="CD_ITEM_NO"/>
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="WERKS" null="true" value=""/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="Z_INV_BUOM" source="CD_UOM"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Z_LIFNR" source="VEND_NO"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CD_VEND_NAME" source="CD_VEND_NAME"/>
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="ZPR_PKGSTR" null="true" value=""/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MATKL" source="TYPE_CD"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="MFRNR" source="CD_MFR_ID"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="KDATB" source="CD_EFFECTIVE_DATE"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="KDATE" source="CD_EXPIRE_DATE"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="BUDAT" source="CD_INV_DATE"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="COST_CENTER_NAME" source="COST_CENTER_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CORP_NAME" source="CORP_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="IDNLF" source="CTLG_NO"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="Z_ESTIMATED_CONTRACT" source="CONTRACT_NO"/>
+    
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PO_LINE_NO" null="true" value=""/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Z_INVOICE_OUOM" source="UM_CD"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="MAKTX" source="MATERIAL_DESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="INV_LINE_NO" source="LINE_NO"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="INV_NO" source="INV_NO"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="SUB_ACCT_ID" source="SUB_ACCT_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SUB_ACCT_NAME" source="SUB_ACCT_NAME"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="CD_SOURCE" source="CD_SOURCE"/>
+    </input>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Union_1">
+  <attributes>
+    <attribute id="PO" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PO"/>
+      <keyMapping columnObjectName="Union_1" columnName="PO"/>
+    </attribute>
+  
+    <attribute id="COMP_CODE" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="COMP_CODE"/>
+  
+      <keyMapping columnObjectName="Union_1" columnName="COMP_CODE"/>
+  
+    </attribute>
+    <attribute id="KONNR" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="KONNR"/>
+      <keyMapping columnObjectName="Union_1" columnName="KONNR"/>
+    </attribute>
+    <attribute id="MFRPN" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MFRPN"/>
+      <keyMapping columnObjectName="Union_1" columnName="MFRPN"/>
+    </attribute>
+    <attribute id="KOKRS" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="KOKRS"/>
+      <keyMapping columnObjectName="Union_1" columnName="KOKRS"/>
+    </attribute>
+    <attribute id="KOSTL" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="KOSTL"/>
+      <keyMapping columnObjectName="Union_1" columnName="KOSTL"/>
+    </attribute>
+    <attribute id="AUFNR" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="AUFNR"/>
+      <keyMapping columnObjectName="Union_1" columnName="AUFNR"/>
+    </attribute>
+    <attribute id="SAKNR" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SAKNR"/>
+      <keyMapping columnObjectName="Union_1" columnName="SAKNR"/>
+    </attribute>
+    <attribute id="MATNR" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MATNR"/>
+      <keyMapping columnObjectName="Union_1" columnName="MATNR"/>
+    </attribute>
+    <attribute id="WERKS" order="11" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="WERKS"/>
+      <keyMapping columnObjectName="Union_1" columnName="WERKS"/>
+    </attribute>
+    <attribute id="Z_INV_BUOM" order="12" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Z_INV_BUOM"/>
+      <keyMapping columnObjectName="Union_1" columnName="Z_INV_BUOM"/>
+    </attribute>
+    <attribute id="Z_LIFNR" order="13" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Z_LIFNR"/>
+      <keyMapping columnObjectName="Union_1" columnName="Z_LIFNR"/>
+    </attribute>
+    <attribute id="CD_VEND_NAME" order="14" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CD_VEND_NAME"/>
+      <keyMapping columnObjectName="Union_1" columnName="CD_VEND_NAME"/>
+    </attribute>
+    <attribute id="ZPR_PKGSTR" order="15" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ZPR_PKGSTR"/>
+      <keyMapping columnObjectName="Union_1" columnName="ZPR_PKGSTR"/>
+    </attribute>
+    <attribute id="MATKL" order="16" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MATKL"/>
+      <keyMapping columnObjectName="Union_1" columnName="MATKL"/>
+    </attribute>
+    <attribute id="MFRNR" order="17" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MFRNR"/>
+      <keyMapping columnObjectName="Union_1" columnName="MFRNR"/>
+    </attribute>
+    <attribute id="KDATB" order="18" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="KDATB"/>
+      <keyMapping columnObjectName="Union_1" columnName="KDATB"/>
+    </attribute>
+    <attribute id="KDATE" order="19" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="KDATE"/>
+      <keyMapping columnObjectName="Union_1" columnName="KDATE"/>
+    </attribute>
+    <attribute id="BUDAT" order="20" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="BUDAT"/>
+      <keyMapping columnObjectName="Union_1" columnName="BUDAT"/>
+    </attribute>
+  
+    <attribute id="SOURCE" order="21" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Source"/>
+  
+      <keyMapping columnObjectName="Union_1" columnName="CD_SOURCE"/>
+  
+    </attribute>
+    <attribute id="COST_CENTER_NAME" order="22" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="COST_CENTER_NAME"/>
+      <keyMapping columnObjectName="Union_1" columnName="COST_CENTER_NAME"/>
+    </attribute>
+    <attribute id="CORP_NAME" order="23" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CORP_NAME"/>
+      <keyMapping columnObjectName="Union_1" columnName="CORP_NAME"/>
+    </attribute>
+    <attribute id="IDNLF" order="24" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="IDNLF"/>
+      <keyMapping columnObjectName="Union_1" columnName="IDNLF"/>
+    </attribute>
+    <attribute id="Z_ESTIMATED_CONTRACT" order="25" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Z_ESTIMATED_CONTRACT"/>
+      <keyMapping columnObjectName="Union_1" columnName="Z_ESTIMATED_CONTRACT"/>
+    </attribute>
+    <attribute id="PO_LINE_NO" order="26" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PO_LINE_NO"/>
+      <keyMapping columnObjectName="Union_1" columnName="PO_LINE_NO"/>
+    </attribute>
+    <attribute id="Z_INVOICE_OUOM" order="27" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Z_INVOICE_OUOM"/>
+      <keyMapping columnObjectName="Union_1" columnName="Z_INVOICE_OUOM"/>
+    </attribute>
+    <attribute id="MAKTX" order="28" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MAKTX"/>
+      <keyMapping columnObjectName="Union_1" columnName="MAKTX"/>
+    </attribute>
+    <attribute id="INV_LINE_NO" order="29" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="INV_LINE_NO"/>
+      <keyMapping columnObjectName="Union_1" columnName="INV_LINE_NO"/>
+    </attribute>
+    <attribute id="INV_NO" order="30" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="INV_NO"/>
+      <keyMapping columnObjectName="Union_1" columnName="INV_NO"/>
+    </attribute>
+    <attribute id="SUB_ACCT_ID" order="31" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SUB_ACCT_ID"/>
+      <keyMapping columnObjectName="Union_1" columnName="SUB_ACCT_ID"/>
+    </attribute>
+    <attribute id="SUB_ACCT_NAME" order="32" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SUB_ACCT_NAME"/>
+      <keyMapping columnObjectName="Union_1" columnName="SUB_ACCT_NAME"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="Z_INV_TAMT" order="2" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Z_INV_TAMT"/>
+      <measureMapping columnObjectName="Union_1" columnName="Z_INV_TAMT"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="-48" y="317"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="185" y="317"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Union_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="81" y="180"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>
