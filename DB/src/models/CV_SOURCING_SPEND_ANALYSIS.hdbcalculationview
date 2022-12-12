@@ -51,6 +51,8 @@
       <viewAttribute id="SUB_ACCT_ID"/>
       <viewAttribute id="SUB_ACCT_NAME"/>
       <viewAttribute id="Z_INV_TAMT"/>
+    
+      <viewAttribute id="INV_ID"/>
     </viewAttributes>
     <calculatedViewAttributes>
       <calculatedViewAttribute id="CD_INV_YEAR" datatype="NVARCHAR" length="4" expressionLanguage="SQL">
@@ -58,7 +60,6 @@
       </calculatedViewAttribute>
     </calculatedViewAttributes>
     <input node="COMPR_SPEND"/>
-  
     <filter>&quot;CD_INV_YEAR&quot; = '$$IP_INV_YEAR$$'</filter>
   </calculationView>
 </calculationViews>
@@ -172,26 +173,31 @@
       <descriptions defaultDescription="MAKTX"/>
       <keyMapping columnObjectName="Projection_1" columnName="MAKTX"/>
     </attribute>
+    <attribute id="INV_LINE_NO" order="28" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="INV_LINE_NO"/>
+      <keyMapping columnObjectName="Projection_1" columnName="INV_LINE_NO"/>
+    </attribute>
     <attribute id="INV_NO" order="29" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="INV_NO"/>
       <keyMapping columnObjectName="Projection_1" columnName="INV_NO"/>
+    </attribute>
+    <attribute id="SUB_ACCT_ID" order="30" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SUB_ACCT_ID"/>
+      <keyMapping columnObjectName="Projection_1" columnName="SUB_ACCT_ID"/>
     </attribute>
     <attribute id="SUB_ACCT_NAME" order="31" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="SUB_ACCT_NAME"/>
       <keyMapping columnObjectName="Projection_1" columnName="SUB_ACCT_NAME"/>
     </attribute>
+  
+    <attribute id="INV_ID" order="32" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="INV_ID"/>
+      <keyMapping columnObjectName="Projection_1" columnName="INV_ID"/>
+    </attribute>
   </attributes>
   <calculatedAttributes/>
   <baseMeasures>
-    <measure id="INV_LINE_NO" order="28" aggregationType="sum" measureType="simple">
-      <descriptions defaultDescription="INV_LINE_NO"/>
-      <measureMapping columnObjectName="Projection_1" columnName="INV_LINE_NO"/>
-    </measure>
-    <measure id="SUB_ACCT_ID" order="30" aggregationType="sum" measureType="simple">
-      <descriptions defaultDescription="SUB_ACCT_ID"/>
-      <measureMapping columnObjectName="Projection_1" columnName="SUB_ACCT_ID"/>
-    </measure>
-    <measure id="Z_INV_TAMT" order="32" aggregationType="sum" measureType="simple">
+    <measure id="Z_INV_TAMT" order="33" aggregationType="sum" measureType="simple">
       <descriptions defaultDescription="Z_INV_TAMT"/>
       <measureMapping columnObjectName="Projection_1" columnName="Z_INV_TAMT"/>
     </measure>

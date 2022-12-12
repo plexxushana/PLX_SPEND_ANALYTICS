@@ -4,7 +4,7 @@
 <localVariables>
   <variable id="IP_YEAR" parameter="true">
     <descriptions defaultDescription="Year"/>
-    <variableProperties datatype="NVARCHAR" length="4" mandatory="false">
+    <variableProperties datatype="NVARCHAR" length="4" mandatory="false" defaultValue="2022">
       <valueDomain type="empty"/>
       <selection multiLine="false" type="SingleValue"/>
     </variableProperties>
@@ -111,6 +111,8 @@
       <viewAttribute id="VOUCH_NO"/>
     
       <viewAttribute id="INV_IDB"/>
+    
+      <viewAttribute id="PERIOD"/>
     </viewAttributes>
     <calculatedViewAttributes>
       <calculatedViewAttribute id="CD_INV_TEMP" datatype="NVARCHAR" length="50" expressionLanguage="SQL">
@@ -121,10 +123,12 @@
       </calculatedViewAttribute>
     
       <calculatedViewAttribute id="CD_INV_DATE" datatype="DATE" expressionLanguage="SQL">
-        <formula>to_date(left(&quot;INV_DATE&quot;,10))</formula>
+    
+        <formula>to_date(right(&quot;PERIOD&quot;,4) || left(&quot;PERIOD&quot;, 2) || substr(&quot;PERIOD&quot;,3,2))</formula>
+    
       </calculatedViewAttribute>
       <calculatedViewAttribute id="CD_INV_YEAR" datatype="NVARCHAR" length="4" expressionLanguage="SQL">
-        <formula>left(&quot;CD_INV_DATE&quot;, 4)</formula>
+        <formula>right(&quot;PERIOD&quot;, 4)</formula>
       </calculatedViewAttribute>
     </calculatedViewAttributes>
     <input node="SYN_AS_INV"/>
@@ -165,6 +169,7 @@
       <viewAttribute id="CM_AMOUNT" aggregationType="sum"/>
       <viewAttribute id="CD_INV_DATE"/>
       <viewAttribute id="CD_INV_YEAR"/>
+      <viewAttribute id="INV_TYPE_CD"/>
       <viewAttribute hidden="true" id="JOIN$INV_IDB$INV_IDB"/>
     </viewAttributes>
     <calculatedViewAttributes/>
@@ -181,6 +186,7 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="VOUCH_NO" source="VOUCH_NO"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CD_INV_DATE" source="CD_INV_DATE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CD_INV_YEAR" source="CD_INV_YEAR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="INV_TYPE_CD" source="INV_TYPE_CD"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$INV_IDB$INV_IDB" source="INV_IDB"/>
     </input>
     <input node="INV_LINE">
@@ -230,7 +236,6 @@
     <input node="SYN_AS_ITEM">
       <mapping xsi:type="Calculation:AttributeMapping" target="MATERIAL_DESC" source="DESCR"/>
     </input>
-  
     <filter>left(&quot;REC_CREATE_DATE&quot;, 4) &gt; '2022'</filter>
   </calculationView>
   <calculationView xsi:type="Calculation:JoinView" id="Join_2" joinType="leftOuter">
@@ -267,6 +272,7 @@
       <viewAttribute id="MATERIAL_DESC"/>
       <viewAttribute id="CD_INV_DATE"/>
       <viewAttribute id="CD_INV_YEAR"/>
+      <viewAttribute id="INV_TYPE_CD"/>
       <viewAttribute hidden="true" id="JOIN$ITEM_ID$ITEM_ID"/>
       <viewAttribute hidden="true" id="JOIN$ITEM_IDB$ITEM_IDB"/>
     </viewAttributes>
@@ -302,6 +308,7 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="CM_AMOUNT" source="CM_AMOUNT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CD_INV_DATE" source="CD_INV_DATE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CD_INV_YEAR" source="CD_INV_YEAR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="INV_TYPE_CD" source="INV_TYPE_CD"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ITEM_ID$ITEM_ID" source="ITEM_ID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ITEM_IDB$ITEM_IDB" source="ITEM_IDB"/>
     </input>
@@ -353,6 +360,7 @@
       <viewAttribute id="MATERIAL_DESC"/>
       <viewAttribute id="CD_INV_DATE"/>
       <viewAttribute id="CD_INV_YEAR"/>
+      <viewAttribute id="INV_TYPE_CD"/>
       <viewAttribute hidden="true" id="JOIN$MFR_IDB$MFR_IDB"/>
     </viewAttributes>
     <calculatedViewAttributes/>
@@ -388,6 +396,7 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="MATERIAL_DESC" source="MATERIAL_DESC"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CD_INV_DATE" source="CD_INV_DATE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CD_INV_YEAR" source="CD_INV_YEAR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="INV_TYPE_CD" source="INV_TYPE_CD"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$MFR_IDB$MFR_IDB" source="MFR_IDB"/>
     </input>
     <input node="Projection_2">
@@ -454,6 +463,7 @@
       <viewAttribute id="MATERIAL_DESC"/>
       <viewAttribute id="CD_INV_DATE"/>
       <viewAttribute id="CD_INV_YEAR"/>
+      <viewAttribute id="INV_TYPE_CD"/>
       <viewAttribute hidden="true" id="JOIN$PO_LINE_IDB$PO_LINE_IDB"/>
     </viewAttributes>
     <calculatedViewAttributes>
@@ -492,6 +502,7 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="MATERIAL_DESC" source="MATERIAL_DESC"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CD_INV_DATE" source="CD_INV_DATE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CD_INV_YEAR" source="CD_INV_YEAR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="INV_TYPE_CD" source="INV_TYPE_CD"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$PO_LINE_IDB$PO_LINE_IDB" source="PO_LINE_IDB"/>
     </input>
     <input node="Projection_3">
@@ -583,6 +594,7 @@
       <viewAttribute id="MATERIAL_DESC"/>
       <viewAttribute id="CD_INV_DATE"/>
       <viewAttribute id="CD_INV_YEAR"/>
+      <viewAttribute id="INV_TYPE_CD"/>
       <viewAttribute hidden="true" id="JOIN$PO_ID$PO_ID"/>
       <viewAttribute hidden="true" id="JOIN$PO_IDB$PO_IDB"/>
     </viewAttributes>
@@ -627,6 +639,7 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="MATERIAL_DESC" source="MATERIAL_DESC"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CD_INV_DATE" source="CD_INV_DATE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CD_INV_YEAR" source="CD_INV_YEAR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="INV_TYPE_CD" source="INV_TYPE_CD"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$PO_ID$PO_ID" source="PO_ID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$PO_IDB$PO_IDB" source="PO_IDB"/>
     </input>
@@ -704,6 +717,7 @@
       <viewAttribute id="MATERIAL_DESC"/>
       <viewAttribute id="CD_INV_DATE"/>
       <viewAttribute id="CD_INV_YEAR"/>
+      <viewAttribute id="INV_TYPE_CD"/>
       <viewAttribute hidden="true" id="JOIN$CORP_ID$CORP_ID"/>
       <viewAttribute hidden="true" id="JOIN$CORP_IDB$CORP_IDB"/>
     </viewAttributes>
@@ -749,6 +763,7 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="MATERIAL_DESC" source="MATERIAL_DESC"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CD_INV_DATE" source="CD_INV_DATE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CD_INV_YEAR" source="CD_INV_YEAR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="INV_TYPE_CD" source="INV_TYPE_CD"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CORP_ID$CORP_ID" source="CORP_ID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CORP_IDB$CORP_IDB" source="CORP_IDB"/>
     </input>
@@ -803,10 +818,11 @@
       <viewAttribute id="EXPIRE_DATE" aggregationType="min"/>
       <viewAttribute id="PO_LINE_NO" aggregationType="sum"/>
       <viewAttribute id="MATERIAL_DESC"/>
-      <viewAttribute id="CORP_ID" aggregationType="sum"/>
-      <viewAttribute id="CORP_IDB" aggregationType="sum"/>
       <viewAttribute id="CD_INV_DATE"/>
       <viewAttribute id="CD_INV_YEAR"/>
+      <viewAttribute id="INV_TYPE_CD"/>
+      <viewAttribute id="CORP_ID" aggregationType="sum"/>
+      <viewAttribute id="CORP_IDB" aggregationType="sum"/>
       <viewAttribute hidden="true" id="JOIN$CONTRACT_ID$CONTRACT_ID"/>
       <viewAttribute hidden="true" id="JOIN$CONTRACT_IDB$CONTRACT_IDB"/>
     </viewAttributes>
@@ -851,6 +867,7 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="MATERIAL_DESC" source="MATERIAL_DESC"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CD_INV_DATE" source="CD_INV_DATE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CD_INV_YEAR" source="CD_INV_YEAR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="INV_TYPE_CD" source="INV_TYPE_CD"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CONTRACT_ID$CONTRACT_ID" source="CONTRACT_ID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CONTRACT_IDB$CONTRACT_IDB" source="CONTRACT_IDB"/>
     </input>
@@ -950,6 +967,8 @@
     
       <viewAttribute id="CD_INV_DATE"/>
       <viewAttribute id="CD_INV_YEAR"/>
+    
+      <viewAttribute id="INV_TYPE_CD"/>
     </viewAttributes>
     <calculatedViewAttributes/>
     <input node="Join_6">
@@ -1008,6 +1027,8 @@
     
       <mapping xsi:type="Calculation:AttributeMapping" target="CD_INV_DATE" source="CD_INV_DATE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CD_INV_YEAR" source="CD_INV_YEAR"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="INV_TYPE_CD" source="INV_TYPE_CD"/>
     </input>
     <input node="Projection_6">
       <mapping xsi:type="Calculation:AttributeMapping" target="COST_CENTER" source="ACCT_NO"/>
@@ -1092,6 +1113,8 @@
     
       <viewAttribute id="CD_INV_DATE"/>
       <viewAttribute id="CD_INV_YEAR"/>
+    
+      <viewAttribute id="INV_TYPE_CD"/>
     </viewAttributes>
     <calculatedViewAttributes/>
     <input node="Join_7">
@@ -1152,6 +1175,8 @@
     
       <mapping xsi:type="Calculation:AttributeMapping" target="CD_INV_DATE" source="CD_INV_DATE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CD_INV_YEAR" source="CD_INV_YEAR"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="INV_TYPE_CD" source="INV_TYPE_CD"/>
     </input>
     <input node="Projection_7">
       <mapping xsi:type="Calculation:AttributeMapping" target="SUB_ACCT_NAME" source="SUB_ACCT_NAME"/>
@@ -1244,6 +1269,8 @@
     
       <viewAttribute id="CD_INV_DATE"/>
       <viewAttribute id="CD_INV_YEAR"/>
+    
+      <viewAttribute id="INV_TYPE_CD"/>
     </viewAttributes>
     <calculatedViewAttributes/>
     <input node="Join_8">
@@ -1306,6 +1333,8 @@
     
       <mapping xsi:type="Calculation:AttributeMapping" target="CD_INV_DATE" source="CD_INV_DATE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CD_INV_YEAR" source="CD_INV_YEAR"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="INV_TYPE_CD" source="INV_TYPE_CD"/>
     </input>
     <input node="Projection_8">
       <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
@@ -1393,6 +1422,8 @@
     
       <viewAttribute id="CD_INV_DATE"/>
       <viewAttribute id="CD_INV_YEAR"/>
+    
+      <viewAttribute id="INV_TYPE_CD"/>
     </viewAttributes>
     <calculatedViewAttributes>
       <calculatedViewAttribute id="CD_VEND_NAME" datatype="NVARCHAR" length="50" expressionLanguage="SQL">
@@ -1465,6 +1496,8 @@
     
       <mapping xsi:type="Calculation:AttributeMapping" target="CD_INV_DATE" source="CD_INV_DATE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CD_INV_YEAR" source="CD_INV_YEAR"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="INV_TYPE_CD" source="INV_TYPE_CD"/>
     </input>
     <input node="Projection_9">
       <mapping xsi:type="Calculation:AttributeMapping" target="VEND_CODE" source="VEND_CODE"/>
@@ -1565,6 +1598,7 @@
       <viewAttribute id="MATERIAL_DESC"/>
       <viewAttribute id="CD_INV_DATE"/>
       <viewAttribute id="CD_INV_YEAR"/>
+      <viewAttribute id="INV_TYPE_CD"/>
       <viewAttribute hidden="true" id="JOIN$COMDTY_CD$COMDTY_CD"/>
     </viewAttributes>
     <calculatedViewAttributes/>
@@ -1620,6 +1654,7 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="PO_LINE_NO" source="PO_LINE_NO"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CD_INV_DATE" source="CD_INV_DATE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CD_INV_YEAR" source="CD_INV_YEAR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="INV_TYPE_CD" source="INV_TYPE_CD"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$COMDTY_CD$COMDTY_CD" source="COMDTY_CD"/>
     </input>
     <input node="Join_11">
@@ -1691,6 +1726,8 @@
     
       <viewAttribute id="CD_INV_DATE"/>
       <viewAttribute id="CD_INV_YEAR"/>
+    
+      <viewAttribute id="INV_TYPE_CD"/>
     </viewAttributes>
     <calculatedViewAttributes>
       <calculatedViewAttribute id="CD_MFR_ID" datatype="NVARCHAR" length="10" expressionLanguage="SQL">
@@ -1718,6 +1755,31 @@
       <calculatedViewAttribute id="CD_PO_LINE_NO" datatype="NVARCHAR" length="5" expressionLanguage="SQL">
     
         <formula>&quot;PO_LINE_NO&quot;</formula>
+    
+      </calculatedViewAttribute>
+    
+      <calculatedViewAttribute id="CD_INV_NO" datatype="NVARCHAR" length="20" expressionLanguage="SQL">
+    
+        <formula>TRIM(&quot;INV_NO&quot;)</formula>
+    
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="CD_INVOICE_TYPE" datatype="NVARCHAR" length="30" expressionLanguage="SQL">
+        <formula>case when &quot;INV_TYPE_CD&quot; = 'C' then 'Check Req'
+     when &quot;INV_TYPE_CD&quot; = 'P' then 'PO Invoice'
+     when &quot;INV_TYPE_CD&quot; = 'T' then 'Invoice Template' 
+    else 'N/A'
+  end</formula>
+      </calculatedViewAttribute>
+    
+      <calculatedViewAttribute id="CD_CORP_ID" datatype="NVARCHAR" length="4" expressionLanguage="SQL">
+    
+        <formula>&quot;CORP_ID&quot;</formula>
+    
+      </calculatedViewAttribute>
+    
+      <calculatedViewAttribute id="CD_CORP_ACC_NO" datatype="NVARCHAR" length="4" expressionLanguage="SQL">
+    
+        <formula>TRIM(&quot;ACCT_NO&quot;)</formula>
     
       </calculatedViewAttribute>
     </calculatedViewAttributes>
@@ -1789,185 +1851,204 @@
       <descriptions defaultDescription="FIELD_006"/>
       <keyMapping columnObjectName="P_Calcs" columnName="CD_PO_NON_PO"/>
     </attribute>
-    <attribute id="INV_NO" order="17" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="FIELD_007"/>
-      <keyMapping columnObjectName="P_Calcs" columnName="INV_NO"/>
-    </attribute>
-    <attribute id="LINE_NO" order="18" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="LINE_NO" order="17" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="FIELD_008"/>
       <keyMapping columnObjectName="P_Calcs" columnName="LINE_NO"/>
     </attribute>
-    <attribute id="CD_ITEM_NO" order="19" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CD_ITEM_NO" order="18" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="FIELD_009"/>
       <keyMapping columnObjectName="P_Calcs" columnName="CD_ITEM_NO"/>
     </attribute>
-    <attribute id="DESCR" order="20" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="DESCR" order="19" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="FIELD_010"/>
       <keyMapping columnObjectName="P_Calcs" columnName="DESCR"/>
     </attribute>
-    <attribute id="CD_VENDOR_CAT" order="21" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CD_VENDOR_CAT" order="20" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="FIELD_011"/>
       <keyMapping columnObjectName="P_Calcs" columnName="CD_VENDOR_CAT"/>
     </attribute>
-    <attribute id="PRICE" order="22" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="PRICE" order="21" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="FIELD_012"/>
       <keyMapping columnObjectName="P_Calcs" columnName="PRICE"/>
     </attribute>
-    <attribute id="COST_CENTER" order="24" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="COST_CENTER" order="23" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="FIELD_014"/>
       <keyMapping columnObjectName="P_Calcs" columnName="COST_CENTER"/>
     </attribute>
   
-    <attribute id="COST_CENTER_NAME" order="25" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="COST_CENTER_NAME" order="24" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="FIELD_015"/>
   
       <keyMapping columnObjectName="P_Calcs" columnName="COST_CENTER_NAME"/>
   
     </attribute>
-    <attribute id="SUB_ACCT_NAME" order="26" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="SUB_ACCT_NAME" order="25" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="FIELD_016"/>
       <keyMapping columnObjectName="P_Calcs" columnName="SUB_ACCT_NAME"/>
     </attribute>
-    <attribute id="ACCT_FMT" order="27" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="ACCT_FMT" order="26" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="FIELD_017"/>
       <keyMapping columnObjectName="P_Calcs" columnName="ACCT_FMT"/>
     </attribute>
-    <attribute id="CD_VEND_NAME" order="28" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CD_VEND_NAME" order="27" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="FIELD_018"/>
       <keyMapping columnObjectName="P_Calcs" columnName="CD_VEND_NAME"/>
     </attribute>
-    <attribute id="CD_VEND_CODE" order="29" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CD_VEND_CODE" order="28" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="FIELD_019"/>
       <keyMapping columnObjectName="P_Calcs" columnName="CD_VEND_CODE"/>
     </attribute>
-    <attribute id="CD_CORPORATION" order="30" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CD_CORPORATION" order="29" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="FIELD_021"/>
       <keyMapping columnObjectName="P_Calcs" columnName="CD_CORPORATION"/>
     </attribute>
-    <attribute id="VEND_NO" order="31" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="VEND_NO" order="30" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="FIELD_022"/>
       <keyMapping columnObjectName="P_Calcs" columnName="VEND_NO"/>
     </attribute>
-    <attribute id="COMDTY_NAME" order="33" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="COMDTY_NAME" order="32" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="FIELD_024"/>
       <keyMapping columnObjectName="P_Calcs" columnName="COMDTY_NAME"/>
     </attribute>
-    <attribute id="CD_UOM" order="34" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CD_UOM" order="33" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="FIELD_026"/>
       <keyMapping columnObjectName="P_Calcs" columnName="CD_UOM"/>
     </attribute>
-    <attribute id="CD_CURRENCY" order="35" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CD_CURRENCY" order="34" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="Currency"/>
       <keyMapping columnObjectName="P_Calcs" columnName="CD_CURRENCY"/>
     </attribute>
-    <attribute id="CORP_ID" order="36" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="CORP_ID"/>
-      <keyMapping columnObjectName="P_Calcs" columnName="CORP_ID"/>
-    </attribute>
-    <attribute id="VOUCH_NO" order="37" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="VOUCH_NO" order="35" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="VOUCH_NO"/>
       <keyMapping columnObjectName="P_Calcs" columnName="VOUCH_NO"/>
     </attribute>
-    <attribute id="CONTRACT_NO" order="38" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CONTRACT_NO" order="36" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="CONTRACT_NO"/>
       <keyMapping columnObjectName="P_Calcs" columnName="CONTRACT_NO"/>
     </attribute>
-    <attribute id="MFR_NAME" order="39" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="MFR_NAME" order="37" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="MFR_NAME"/>
       <keyMapping columnObjectName="P_Calcs" columnName="MFR_NAME"/>
     </attribute>
-    <attribute id="CD_MFR_NUM" order="40" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CD_MFR_NUM" order="38" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="CD_MFR_NUM"/>
       <keyMapping columnObjectName="P_Calcs" columnName="CD_MFR_NUM"/>
     </attribute>
   
-    <attribute id="PO_NO" order="41" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="PO_NO" order="39" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="PO_NO"/>
   
       <keyMapping columnObjectName="P_Calcs" columnName="PO_NO"/>
   
     </attribute>
   
-    <attribute id="CTLG_NO" order="42" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CTLG_NO" order="40" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="CTLG_NO"/>
   
       <keyMapping columnObjectName="P_Calcs" columnName="CTLG_NO"/>
   
     </attribute>
-    <attribute id="EFFECTIVE_DATE" order="43" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="EFFECTIVE_DATE" order="41" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="EFFECTIVE_DATE"/>
       <keyMapping columnObjectName="P_Calcs" columnName="EFFECTIVE_DATE"/>
     </attribute>
   
-    <attribute id="UM_CD" order="44" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="UM_CD" order="42" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="UM_CD"/>
   
       <keyMapping columnObjectName="P_Calcs" columnName="UM_CD"/>
   
     </attribute>
   
-    <attribute id="TYPE_CD" order="45" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="TYPE_CD" order="43" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="TYPE_CD"/>
   
       <keyMapping columnObjectName="P_Calcs" columnName="TYPE_CD"/>
   
     </attribute>
   
-    <attribute id="INV_LINE_ID" order="46" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="INV_LINE_ID" order="44" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="INV_LINE_ID"/>
   
       <keyMapping columnObjectName="P_Calcs" columnName="INV_LINE_ID"/>
   
     </attribute>
-    <attribute id="CD_MFR_ID" order="48" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CD_MFR_ID" order="46" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="CD_MFR_ID"/>
       <keyMapping columnObjectName="P_Calcs" columnName="CD_MFR_ID"/>
     </attribute>
-    <attribute id="MFR_ID" order="49" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="MFR_ID" order="47" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="MFR_ID"/>
       <keyMapping columnObjectName="P_Calcs" columnName="MFR_ID"/>
     </attribute>
-    <attribute id="CD_EFFECTIVE_DATE" order="50" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CD_EFFECTIVE_DATE" order="48" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="CD_EFFECTIVE_DATE"/>
       <keyMapping columnObjectName="P_Calcs" columnName="CD_EFFECTIVE_DATE"/>
     </attribute>
   
-    <attribute id="EXPIRE_DATE" order="51" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="EXPIRE_DATE" order="49" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="EXPIRE_DATE"/>
   
       <keyMapping columnObjectName="P_Calcs" columnName="EXPIRE_DATE"/>
   
     </attribute>
-    <attribute id="CD_EXPIRE_DATE" order="52" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CD_EXPIRE_DATE" order="50" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="CD_EXPIRE_DATE"/>
       <keyMapping columnObjectName="P_Calcs" columnName="CD_EXPIRE_DATE"/>
     </attribute>
   
-    <attribute id="CD_PO_LINE_ID" order="53" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CD_PO_LINE_ID" order="51" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="CD_PO_LINE_ID"/>
   
       <keyMapping columnObjectName="P_Calcs" columnName="CD_PO_LINE_ID"/>
   
     </attribute>
   
-    <attribute id="PO_LINE_NO" order="54" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="PO_LINE_NO" order="52" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="CD_PO_LINE_NO"/>
   
       <keyMapping columnObjectName="P_Calcs" columnName="CD_PO_LINE_NO"/>
   
     </attribute>
-    <attribute id="MATERIAL_DESC" order="55" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="MATERIAL_DESC" order="53" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="MATERIAL_DESC"/>
       <keyMapping columnObjectName="P_Calcs" columnName="MATERIAL_DESC"/>
     </attribute>
   
-    <attribute id="CD_INV_DATE" order="56" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CD_INV_DATE" order="54" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="Invoice Date"/>
+  
       <keyMapping columnObjectName="P_Calcs" columnName="CD_INV_DATE"/>
+  
     </attribute>
-    <attribute id="CD_INV_YEAR" order="57" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CD_INV_YEAR" order="55" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="Year"/>
       <keyMapping columnObjectName="P_Calcs" columnName="CD_INV_YEAR"/>
+    </attribute>
+  
+    <attribute id="INV_NO" order="56" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Invoice Number"/>
+  
+      <keyMapping columnObjectName="P_Calcs" columnName="CD_INV_NO"/>
+  
+    </attribute>
+    <attribute id="INVOICE_TYPE" order="57" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Invoice Type"/>
+      <keyMapping columnObjectName="P_Calcs" columnName="CD_INVOICE_TYPE"/>
+    </attribute>
+  
+    <attribute id="CORP_ID" order="58" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CD_CORP_ID"/>
+  
+      <keyMapping columnObjectName="P_Calcs" columnName="CD_CORP_ID"/>
+  
+    </attribute>
+  
+    <attribute id="CORP_ACC_NO" order="59" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CD_CORP_ACC_NO"/>
+  
+      <keyMapping columnObjectName="P_Calcs" columnName="CD_CORP_ACC_NO"/>
+  
     </attribute>
   </attributes>
   <calculatedAttributes/>
@@ -1977,17 +2058,17 @@
       <measureMapping columnObjectName="P_Calcs" columnName="NET_INV_AMT"/>
     </measure>
   
-    <measure id="QTY" order="23" aggregationType="sum" measureType="simple">
+    <measure id="QTY" order="22" aggregationType="sum" measureType="simple">
       <descriptions defaultDescription="FIELD_013"/>
       <measureMapping columnObjectName="P_Calcs" columnName="QTY"/>
     </measure>
   
-    <measure id="PMT_PRICE" order="32" aggregationType="sum" measureType="simple">
+    <measure id="PMT_PRICE" order="31" aggregationType="sum" measureType="simple">
       <descriptions defaultDescription="FIELD_023"/>
       <measureMapping columnObjectName="P_Calcs" columnName="PMT_PRICE"/>
     </measure>
   
-    <measure id="CM_AMOUNT" order="47" aggregationType="sum" measureType="simple">
+    <measure id="CM_AMOUNT" order="45" aggregationType="sum" measureType="simple">
       <descriptions defaultDescription="CM_AMOUNT"/>
       <measureMapping columnObjectName="P_Calcs" columnName="CM_AMOUNT"/>
     </measure></baseMeasures>
@@ -1998,21 +2079,21 @@
 <layout>
   <shapes>
     <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
-      <upperLeftCorner x="428.11469439219206" y="112"/>
+      <upperLeftCorner x="428" y="112"/>
     
       <rectangleSize width="160"/>
     </shape>
   
     <shape expanded="true" modelObjectName="INV_LINE" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="654.3228685568556" y="2261.9999845027924"/>
+      <upperLeftCorner x="654" y="2261"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape expanded="true" modelObjectName="INV_Data" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="444.3228685568555" y="2261.9999845027924"/>
+      <upperLeftCorner x="444" y="2261"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="556.0000000000001" y="2101.9999856948853"/>
+      <upperLeftCorner x="556" y="2101"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape modelObjectName="INV_Data" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
@@ -2025,11 +2106,11 @@
     </shape>
   
     <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="346" y="2101.9999856948853"/>
+      <upperLeftCorner x="346" y="2101"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape expanded="true" modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="399.3333333333333" y="1941.9999868869781"/>
+      <upperLeftCorner x="399" y="1941"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape modelObjectName="Join_1" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
@@ -2041,7 +2122,7 @@
       <rectangleSize width="136"/>
     </shape>
     <shape expanded="true" modelObjectName="Join_3" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="664.9202258757302" y="1781.999988079071"/>
+      <upperLeftCorner x="664" y="1781"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape modelObjectName="Join_2" modelObjectNameSpace="Join_3" modelObjectType="JoinNodeInput">
@@ -2053,11 +2134,11 @@
       <rectangleSize width="136"/>
     </shape>
     <shape expanded="true" modelObjectName="Projection_2" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="700.3473784447878" y="1941.9999868869781"/>
+      <upperLeftCorner x="700" y="1941"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape expanded="true" modelObjectName="Join_4" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="481.58689254239704" y="1621.999989271164"/>
+      <upperLeftCorner x="481" y="1621"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape modelObjectName="Join_3" modelObjectNameSpace="Join_4" modelObjectType="JoinNodeInput">
@@ -2069,16 +2150,16 @@
       <rectangleSize width="149"/>
     </shape>
     <shape expanded="true" modelObjectName="Projection_3" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="454.92022587573035" y="1781.999988079071"/>
+      <upperLeftCorner x="454" y="1781"/>
       <rectangleSize height="30" width="160"/>
     </shape>
   
     <shape expanded="true" modelObjectName="Projection_4" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="782.5852619704781" y="1621.999989271164"/>
+      <upperLeftCorner x="782" y="1621"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape expanded="true" modelObjectName="Join_5" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="734.2383774422137" y="1461.9999904632568"/>
+      <upperLeftCorner x="734" y="1461"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape modelObjectName="Join_4" modelObjectNameSpace="Join_5" modelObjectType="JoinNodeInput">
@@ -2090,11 +2171,11 @@
       <rectangleSize width="142"/>
     </shape>
     <shape expanded="true" modelObjectName="Projection_5" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="405.21558508174144" y="1301.9999916553497"/>
+      <upperLeftCorner x="405" y="1301"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape expanded="true" modelObjectName="Join_6" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="461.05397667192614" y="1141.9999928474426"/>
+      <upperLeftCorner x="461" y="1141"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape modelObjectName="Join_13" modelObjectNameSpace="Join_6" modelObjectType="JoinNodeInput">
@@ -2106,7 +2187,7 @@
       <rectangleSize width="142"/>
     </shape>
     <shape expanded="true" modelObjectName="Join_13" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="615.2155850817414" y="1301.9999916553497"/>
+      <upperLeftCorner x="615" y="1301"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape modelObjectName="Join_5" modelObjectNameSpace="Join_13" modelObjectType="JoinNodeInput">
@@ -2119,16 +2200,16 @@
     </shape>
   
     <shape expanded="true" modelObjectName="Projection_11" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="508.23837744221373" y="1461.9999904632568"/>
+      <upperLeftCorner x="508" y="1461"/>
       <rectangleSize height="30" width="176"/>
     </shape>
   
     <shape expanded="true" modelObjectName="Projection_6" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="251.05397667192602" y="1141.9999928474426"/>
+      <upperLeftCorner x="251" y="1141"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape expanded="true" modelObjectName="Join_7" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="246.21046663453052" y="981.9999940395355"/>
+      <upperLeftCorner x="246" y="981"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape modelObjectName="Join_6" modelObjectNameSpace="Join_7" modelObjectType="JoinNodeInput">
@@ -2140,11 +2221,11 @@
       <rectangleSize width="136"/>
     </shape>
     <shape expanded="true" modelObjectName="Projection_7" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="456.2104666345306" y="981.9999940395355"/>
+      <upperLeftCorner x="456" y="981"/>
       <rectangleSize height="30" width="193"/>
     </shape>
     <shape expanded="true" modelObjectName="Join_8" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="246.19451249055726" y="821.9999952316284"/>
+      <upperLeftCorner x="246" y="821"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape modelObjectName="Join_7" modelObjectNameSpace="Join_8" modelObjectType="JoinNodeInput">
@@ -2156,11 +2237,11 @@
       <rectangleSize width="169"/>
     </shape>
     <shape expanded="true" modelObjectName="Projection_8" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="456.19451249055726" y="821.9999952316284"/>
+      <upperLeftCorner x="456" y="821"/>
       <rectangleSize height="30" width="203"/>
     </shape>
     <shape expanded="true" modelObjectName="Join_9" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="272.86117915722394" y="661.9999964237213"/>
+      <upperLeftCorner x="272" y="661"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape modelObjectName="Join_8" modelObjectNameSpace="Join_9" modelObjectType="JoinNodeInput">
@@ -2172,11 +2253,11 @@
       <rectangleSize width="136"/>
     </shape>
     <shape expanded="true" modelObjectName="Projection_9" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="506.4704653885174" y="661.9999964237213"/>
+      <upperLeftCorner x="506" y="661"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape expanded="true" modelObjectName="Join_10" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="339.2507470616504" y="501.9999976158142"/>
+      <upperLeftCorner x="339" y="501"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape modelObjectName="Join_9" modelObjectNameSpace="Join_10" modelObjectType="JoinNodeInput">
@@ -2188,11 +2269,11 @@
       <rectangleSize width="141"/>
     </shape>
     <shape expanded="true" modelObjectName="Projection_10" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="92.00000000000011" y="2101.9999856948853"/>
+      <upperLeftCorner x="92" y="2101"/>
       <rectangleSize height="30" width="204"/>
     </shape>
     <shape expanded="true" modelObjectName="Join_11" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="140.66666666666674" y="1941.9999868869781"/>
+      <upperLeftCorner x="140" y="1941"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_11" modelObjectType="JoinNodeInput">
@@ -2204,7 +2285,7 @@
       <rectangleSize width="142"/>
     </shape>
     <shape expanded="true" modelObjectName="Join_12" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="312.5840803949837" y="341.9999988079071"/>
+      <upperLeftCorner x="312" y="341"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape modelObjectName="Join_10" modelObjectNameSpace="Join_12" modelObjectType="JoinNodeInput">
@@ -2216,7 +2297,7 @@
       <rectangleSize width="250"/>
     </shape>
     <shape expanded="true" modelObjectName="P_Calcs" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="428.11469439219206" y="217"/>
+      <upperLeftCorner x="428" y="217"/>
       <rectangleSize height="30" width="160"/>
     </shape>
   </shapes>

@@ -132,7 +132,9 @@
       </calculatedViewAttribute>
     
       <calculatedViewAttribute id="CD_BUDAT" datatype="DATE" expressionLanguage="SQL">
+    
         <formula>TO_DATE(&quot;BUDAT&quot;)</formula>
+    
       </calculatedViewAttribute>
     </calculatedViewAttributes>
     <input node="SYN_CV_SPEND_INVOICES"/>
@@ -208,6 +210,8 @@
       <viewAttribute id="PO_LINE_NO"/>
     
       <viewAttribute id="MATERIAL_DESC"/>
+    
+      <viewAttribute id="CORP_ACC_NO"/>
     </viewAttributes>
     <calculatedViewAttributes>
       <calculatedViewAttribute id="CD_CORP_COMPANY" datatype="NVARCHAR" length="4" expressionLanguage="SQL">
@@ -272,6 +276,8 @@
       <viewAttribute id="SUB_ACCT_NAME"/>
     
       <viewAttribute id="CD_SOURCE"/>
+    
+      <viewAttribute id="INV_ID" aggregationType="sum"/>
     </viewAttributes>
     <calculatedViewAttributes/>
     <input node="Projection_1" emptyUnionBehavior="NO_ROW">
@@ -323,13 +329,15 @@
       <mapping xsi:type="Calculation:ConstantAttributeMapping" target="SUB_ACCT_NAME" null="true" value=""/>
     
       <mapping xsi:type="Calculation:AttributeMapping" target="CD_SOURCE" source="CD_SOURCE"/>
+    
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="INV_ID" null="true" value=""/>
     </input>
     <input node="Projection_2" emptyUnionBehavior="NO_ROW">
       <mapping xsi:type="Calculation:AttributeMapping" target="PO" source="PO_NO"/>
     
       <mapping xsi:type="Calculation:AttributeMapping" target="Z_INV_TAMT" source="CM_AMOUNT"/>
     
-      <mapping xsi:type="Calculation:AttributeMapping" target="COMP_CODE" source="CD_CORP_COMPANY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COMP_CODE" source="CORP_ACC_NO"/>
     
       <mapping xsi:type="Calculation:AttributeMapping" target="KONNR" source="CONTRACT_NO"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="MFRPN" source="CTLG_NO"/>
@@ -373,6 +381,8 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="SUB_ACCT_NAME" source="SUB_ACCT_NAME"/>
     
       <mapping xsi:type="Calculation:AttributeMapping" target="CD_SOURCE" source="CD_SOURCE"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="INV_ID" source="INV_ID"/>
     </input>
   </calculationView>
 </calculationViews>
@@ -507,6 +517,13 @@
     <attribute id="SUB_ACCT_NAME" order="32" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="SUB_ACCT_NAME"/>
       <keyMapping columnObjectName="Union_1" columnName="SUB_ACCT_NAME"/>
+    </attribute>
+  
+    <attribute id="INV_ID" order="33" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="INV_ID"/>
+  
+      <keyMapping columnObjectName="Union_1" columnName="INV_ID"/>
+  
     </attribute>
   </attributes>
   <calculatedAttributes/>
