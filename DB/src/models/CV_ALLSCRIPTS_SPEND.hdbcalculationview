@@ -12,44 +12,44 @@
 </localVariables>
 <variableMappings/>
 <dataSources>
-  <DataSource id="SYN_AS_INV_LINE">
-    <resourceUri>SYN_AS_INV_LINE</resourceUri>
+  <DataSource id="AS_INV_LINE">
+    <resourceUri>AS_INV_LINE</resourceUri>
   </DataSource>
-  <DataSource id="SYN_AS_INV">
-    <resourceUri>SYN_AS_INV</resourceUri>
+  <DataSource id="AS_INV">
+    <resourceUri>AS_INV</resourceUri>
   </DataSource>
-  <DataSource id="SYN_AS_ITEM">
-    <resourceUri>SYN_AS_ITEM</resourceUri>
+  <DataSource id="AS_ITEM">
+    <resourceUri>AS_ITEM</resourceUri>
   </DataSource>
-  <DataSource id="SYN_AS_MFR">
-    <resourceUri>SYN_AS_MFR</resourceUri>
+  <DataSource id="AS_MFR">
+    <resourceUri>AS_MFR</resourceUri>
   </DataSource>
-  <DataSource id="SYN_AS_PO_LINE">
-    <resourceUri>SYN_AS_PO_LINE</resourceUri>
+  <DataSource id="AS_PO_LINE">
+    <resourceUri>AS_PO_LINE</resourceUri>
   </DataSource>
-  <DataSource id="SYN_AS_PO">
-    <resourceUri>SYN_AS_PO</resourceUri>
+  <DataSource id="AS_PO">
+    <resourceUri>AS_PO</resourceUri>
   </DataSource>
-  <DataSource id="SYN_AS_CORP">
-    <resourceUri>SYN_AS_CORP</resourceUri>
+  <DataSource id="AS_CORP">
+    <resourceUri>AS_CORP</resourceUri>
   </DataSource>
-  <DataSource id="SYN_AS_CONTRACT">
-    <resourceUri>SYN_AS_CONTRACT</resourceUri>
+  <DataSource id="AS_CONTRACT">
+    <resourceUri>AS_CONTRACT</resourceUri>
   </DataSource>
-  <DataSource id="SYN_AS_CC">
-    <resourceUri>SYN_AS_CC</resourceUri>
+  <DataSource id="AS_CC">
+    <resourceUri>AS_CC</resourceUri>
   </DataSource>
-  <DataSource id="SYN_AS_SUB_ACCT">
-    <resourceUri>SYN_AS_SUB_ACCT</resourceUri>
+  <DataSource id="AS_SUB_ACCT">
+    <resourceUri>AS_SUB_ACCT</resourceUri>
   </DataSource>
-  <DataSource id="SYN_AS_VEND_REMIT">
-    <resourceUri>SYN_AS_VEND_REMIT</resourceUri>
+  <DataSource id="AS_VEND_REMIT">
+    <resourceUri>AS_VEND_REMIT</resourceUri>
   </DataSource>
-  <DataSource id="SYN_AS_VEND">
-    <resourceUri>SYN_AS_VEND</resourceUri>
+  <DataSource id="AS_VEND">
+    <resourceUri>AS_VEND</resourceUri>
   </DataSource>
-  <DataSource id="SYN_AS_CODE_TABLE">
-    <resourceUri>SYN_AS_CODE_TABLE</resourceUri>
+  <DataSource id="AS_CODE_TABLE">
+    <resourceUri>AS_CODE_TABLE</resourceUri>
   </DataSource>
 </dataSources>
 <calculationViews>
@@ -93,7 +93,7 @@
     
       </calculatedViewAttribute>
     </calculatedViewAttributes>
-    <input node="SYN_AS_INV_LINE"/>
+    <input node="AS_INV_LINE"/>
     <filter>&quot;STAT&quot; in ( 1, 2) and &quot;REC_CREATE_DATE&quot; &gt; '2022-03-01'</filter>
   </calculationView>
   <calculationView xsi:type="Calculation:ProjectionView" id="INV_Data" filterExpressionLanguage="SQL">
@@ -131,7 +131,7 @@
         <formula>right(&quot;PERIOD&quot;, 4)</formula>
       </calculatedViewAttribute>
     </calculatedViewAttributes>
-    <input node="SYN_AS_INV"/>
+    <input node="AS_INV"/>
     <filter>&quot;STAT&quot; in (1 , 2) and &quot;CD_INV_DATE&quot; &gt; '2020-01-01' and &quot;CD_INV_YEAR&quot; = '$$IP_YEAR$$' </filter>
   </calculationView>
   <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="leftOuter">
@@ -233,7 +233,7 @@
       <viewAttribute id="REC_CREATE_DATE"/>
     </viewAttributes>
     <calculatedViewAttributes/>
-    <input node="SYN_AS_ITEM">
+    <input node="AS_ITEM">
       <mapping xsi:type="Calculation:AttributeMapping" target="MATERIAL_DESC" source="DESCR"/>
     </input>
     <filter>left(&quot;REC_CREATE_DATE&quot;, 4) &gt; '2022'</filter>
@@ -421,7 +421,7 @@
         <formula>LTRIM(RTRIM(&quot;MFR_NO&quot;))</formula>
       </calculatedViewAttribute>
     </calculatedViewAttributes>
-    <input node="SYN_AS_MFR">
+    <input node="AS_MFR">
       <mapping xsi:type="Calculation:AttributeMapping" target="MFR_NAME" source="NAME"/>
     </input>
   </calculationView>
@@ -535,7 +535,7 @@
       <viewAttribute id="SUB_ACCT_ID"/>
       <viewAttribute id="SUB_PROJECT_IDB"/></viewAttributes>
     <calculatedViewAttributes/>
-    <input node="SYN_AS_PO_LINE">
+    <input node="AS_PO_LINE">
       <mapping xsi:type="Calculation:AttributeMapping" target="PO_LINE_NO" source="LINE_NO"/>
     </input>
   </calculationView>
@@ -550,7 +550,7 @@
       <viewAttribute id="PO_NO"/>
     </viewAttributes>
     <calculatedViewAttributes/>
-    <input node="SYN_AS_PO"/>
+    <input node="AS_PO"/>
   </calculationView>
   <calculationView xsi:type="Calculation:JoinView" id="Join_5" joinType="leftOuter">
     <viewAttributes>
@@ -667,7 +667,7 @@
         <formula>&quot;ACCT_NO&quot; || ' _ ' || &quot;CORP_NAME&quot;</formula>
       </calculatedViewAttribute>
     </calculatedViewAttributes>
-    <input node="SYN_AS_CORP">
+    <input node="AS_CORP">
       <mapping xsi:type="Calculation:AttributeMapping" target="CORP_NAME" source="NAME"/>
     </input>
   </calculationView>
@@ -893,7 +893,7 @@
       <viewAttribute id="CONTRACT_IDB"/>
       <viewAttribute id="PRICE_PROTECT_DATE"/></viewAttributes>
     <calculatedViewAttributes/>
-    <input node="SYN_AS_CONTRACT"/>
+    <input node="AS_CONTRACT"/>
   </calculationView>
   <calculationView xsi:type="Calculation:ProjectionView" id="Projection_6">
     <viewAttributes>
@@ -904,7 +904,7 @@
       <viewAttribute id="COST_CENTER_NAME"/>
     </viewAttributes>
     <calculatedViewAttributes/>
-    <input node="SYN_AS_CC">
+    <input node="AS_CC">
       <mapping xsi:type="Calculation:AttributeMapping" target="COST_CENTER_NAME" source="NAME"/>
     </input>
   </calculationView>
@@ -1048,7 +1048,7 @@
       <viewAttribute id="ACCT_FMT"/>
     </viewAttributes>
     <calculatedViewAttributes/>
-    <input node="SYN_AS_SUB_ACCT">
+    <input node="AS_SUB_ACCT">
       <mapping xsi:type="Calculation:AttributeMapping" target="SUB_ACCT_NAME" source="NAME"/>
     </input>
   </calculationView>
@@ -1202,7 +1202,7 @@
         <formula>REPLACE(&quot;CURR_CD&quot;, 'CURR04', '')</formula>
       </calculatedViewAttribute>
     </calculatedViewAttributes>
-    <input node="SYN_AS_VEND_REMIT"/>
+    <input node="AS_VEND_REMIT"/>
     <filter>&quot;VEND_REMIT_GROUP_CD&quot; not in ('VGRP10DOC','VGRP10DOC-EFT','VGRP10EMP','VGRP10EMP-EFT', 'VGRP10PAT')</filter>
   </calculationView>
   <calculationView xsi:type="Calculation:JoinView" id="Join_9" joinType="leftOuter">
@@ -1355,7 +1355,7 @@
       <viewAttribute id="VEND_CODE"/>
     </viewAttributes>
     <calculatedViewAttributes/>
-    <input node="SYN_AS_VEND"/>
+    <input node="AS_VEND"/>
   </calculationView>
   <calculationView xsi:type="Calculation:JoinView" id="Join_10" joinType="leftOuter">
     <viewAttributes>
@@ -1514,7 +1514,7 @@
       <viewAttribute id="NAME"/>
     </viewAttributes>
     <calculatedViewAttributes/>
-    <input node="SYN_AS_CODE_TABLE"/>
+    <input node="AS_CODE_TABLE"/>
   </calculationView>
   <calculationView xsi:type="Calculation:JoinView" id="Join_11" cardinality="CN_N" joinType="inner">
     <viewAttributes>
