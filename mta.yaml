@@ -15,6 +15,7 @@ modules:
         properties:
           key: ServiceName_PLX_HDI
           service: '~{the-service-name}'
+      - name: grant-service
 resources:
   - name: HDI_SPEND
     parameters:
@@ -29,3 +30,7 @@ resources:
     properties:
       the-service-name: '${service-name}'
     type: org.cloudfoundry.existing-service
+  - name: grant-service
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service-name: grant-service

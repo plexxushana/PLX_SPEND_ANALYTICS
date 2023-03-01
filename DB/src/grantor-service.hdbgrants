@@ -1,0 +1,42 @@
+{
+   "grant-service": {
+       "object_owner": {
+       "roles" : ["plx_security::ZALL_MODELS_SQL"],
+       "global_object_privileges":[
+           
+           {
+              "name":"PLX_ALLSCRIPTS",
+              "type":"REMOTE SOURCE",
+              "privileges":[
+                 "CREATE VIRTUAL TABLE",
+                 "CREATE VIRTUAL FUNCTION",
+                 "CREATE VIRTUAL PROCEDURE",
+                 "CREATE REMOTE SUBSCRIPTION",
+                 "PROCESS REMOTE SUBSCRIPTION EXCEPTION",
+                 "ALTER",
+                 "DROP"
+              ] 
+           }
+        ]
+       },
+       "application_user": {
+       "roles" : ["plx_security::ZALL_MODELS_SQL"],
+       "global_object_privileges":[
+           {
+              "name":"PLX_ALLSCRIPTS",
+              "type":"REMOTE SOURCE",
+              "privileges":[
+                 "CREATE VIRTUAL TABLE",
+                 "CREATE VIRTUAL FUNCTION",
+                 "CREATE VIRTUAL PROCEDURE",
+                 "CREATE REMOTE SUBSCRIPTION",
+                 "PROCESS REMOTE SUBSCRIPTION EXCEPTION",
+                 "ALTER",
+                 "DROP"
+              
+              ]
+           }
+        ]
+       }
+   }
+}
